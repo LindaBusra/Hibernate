@@ -1,6 +1,6 @@
 package com.hb02.embeddable;
 
-import com.hb01.annotations.Student01;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -17,6 +17,9 @@ public class RunnerSave02 {
 
         Address address = new Address("Apple Street", "New York", "USA", "01-001");
         student1.setAddress(address);
+        //or
+//        student1.setAddress(new Address("Apple Street", "New York", "USA", "01-001"));
+
 
 
         Student02 student2 = new Student02();
@@ -24,6 +27,8 @@ public class RunnerSave02 {
         student2.setName("John");
         student2.setGrade(90);
         student2.setAddress(new Address("Queens", "New York", "USA", "01-001"));
+
+
 
         Configuration con = new Configuration()
                 .configure("hibernate.cfg.xml")
@@ -34,8 +39,8 @@ public class RunnerSave02 {
         Transaction transaction = session.beginTransaction();
 
 
-        session.save(student1);
-        session.save(student2);
+        session.saveOrUpdate(student1);
+        session.saveOrUpdate(student2);
 
 
         transaction.commit();
