@@ -43,7 +43,7 @@ public class Diary {
 
     @Override
     public String toString() {
-        return "Diary{" +
+        return "DiaryForCustomer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", student=" + student +
