@@ -3,6 +3,9 @@ package com.hb05.uni_manytoone;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+//why student includes manyToOne (university not)
+//it is not easy to manage to store students data in university
+//we store university information in student.
 
 @Entity
 @Table(name="t_student05")

@@ -1,7 +1,5 @@
 package com.hb10.idgeneration;
 
-import com.hb09_fetchtypes.Book09;
-import com.hb09_fetchtypes.Student09;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

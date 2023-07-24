@@ -1,0 +1,142 @@
+
+//for bacht161-167-hibernate NT students: https://github.com/frotan1428/bacht161-167-hibernate/tree/main
+
+Hibernate : advance form of JDBC to communicate database
+Hibernate is an open source Object-Relational Persistence and Query service for any Java Application.
+Hibernate is the most popular Object-Relational Mapping (ORM) tool which is used to save the state of Java object
+into the database. It uses for For object-relational mapping.
+
+
+ORM: Object Relational Mapping
+ORM is a technique used in creating a "bridge" between object oriented programs and, in most cases, relational databases.
+You can see the ORM as the layer that connects object oriented programming (OOP) to relational databases.
+Popular ORM Tools for Java: Hibernate, Apache OpenJPA, EclipseLink, JOOQ
+
+
+Persistence: permanent storage, to save the data outside of the code
+
+
+Java Persistence API (Application Programming Interface )/Jakarta Persistence API defines the management of relational
+data in the Java applications.
+It is used to examine, control, and persist data between Java objects and relational databases. It is observed as a
+standard technique for Object Relational Mapping.
+It is a set of rules and guidelines to set interfaces for implementing object-relational mapping
+It supports polymorphism and inheritance.
+
+
+JDBC is acronym of Java Database Connectivity. It is used to connect your application to the
+database and transactions . It is an open source Java API. Hibernate is also used for connect
+your application to database and to do database related transactions but with different approach.
+ JDBC: connect app with data base, to manipulate data we need JDBC.
+
+ 1-OOP  : Object Oriented Programming
+ 2-Persistent Data : Need for making a Data persistent, and the term Persistent
+ 3-Database : RDBMS, PostgreSQL
+ 4-CRUD Operations : Create, Read, Update, Delete
+
+ //why we use maven project ?
+ Maven is chiefly used for Java-based projects, helping to download dependencies, which refers to the libraries
+ or JAR files. The tool helps get the right JAR files for each project as there may be different versions of separate packages.
+
+
+@annotations: Java annotations are metadata (data about data) for our program source code. They provide additional
+information about the program to the compiler but are not part of the program itself. These annotations
+do not affect the execution of the compiled program. Annotations may also include elements (members/attributes/parameters).
+
+
+Annotations: @AnnotationName
+@Entity     :Defines that a class can be mapped to a table
+@Table      :Specifies the details of the table that will be persist the entity
+@Id        :Indicates the member field below is the PK of current entity
+@Column     :Used for adding the column the name in the table of a particular DB
+@Transient  :Used to ignore a field from serialization,making it not appear on the DB, as a column
+@Embeddable :It is an annotation to declare that a class will be embedded by other entities.
+@JoinColumn :It is used to specify the foreign key column and its properties
+
+
+
+ORPHANE REMOVAL: It removes null datas in parent and the things related with it in child table . You apply the cascade and orphanel same time.
+CascadeType.REMOVE: If the parent gets removed, children tables will get removed with it too.
+Cascade.PERSIST:    If a Student is saved, you don't need to save the books separately. (Only when you already set the books for the Student) it saves child automatically
+
+==================================================================================================================
+
+Uni-Directional structure: just Diary can navigate the student. We access information of student from Diary.
+But we can not access information of diary from student.
+
+Uni-Directional One-to-One Mapping:
+
+@Entity                                         @Entity
+public class Student{                           public class Diary{
+@Id                                             @Id
+private int id;                                 private int id;
+private String name;                            private String name;
+
+                                                @OneToOne
+                                                @JoinColumn
+}                                               private Student Student;
+                                                }
+
+@JoinColumn :It is used to specify the foreign key column and its properties
+
+
+--------------------------------------------------------------------------------------------------------------
+
+Bi-Directional :They can access their information.
+
+Bi-Directional One-to-One Mapping:  (owner-parent is Diary)
+
+@Entity                                         @Entity
+public class Student{                           public class Diary{
+@Id                                             @Id
+private int id;                                 private int id;
+private String name;                            private String name;
+
+@OneToOne(mappedBy="student")                   @OneToOne
+private Diary diary;                            @JoinColumn
+}                                               private Student Student;
+                                                }
+
+mappedBy signals hibernate that the key for the relationship is on the other side. This means that although you link 2 tables
+together, only 1 of those tables has a foreign key constraint to the other one.
+
+---------------------------------------------------------------------------------------------------
+
+Uni-Directional Many-to-One Relationship:
+It is defined as a relationship between several instances of one entity and one instance of another entity. For example,
+it is possible for more than one student to work on a project. or One university can have one or more Student.
+
+
+
+
+
+Some Hibernate Classes
+1-Configuration Class :
+Used to define all configuration and mapping sources in one API and to then build the
+SessionFactory in one-shot. The configuration and mapping sources defined here are just held
+here until the SessionFactory is built.
+
+2-SessionFactory :
+It is responsible for the creation of Session objects. The Hibernate Session provides methods such
+as save, delete and update, all of which are used to perform CRUD-based operations on the
+database to which the SessionFactory connects
+
+3-Session Interface :
+The Session interface is the main tool used to communicate with Hibernate. It provides an API
+enabling us to create, read, update, and delete persistent objects. The session has a simple
+lifecycle.
+
+4-.Transaction Interface :
+Allows the application to define units of work, while maintaining abstraction from the
+underlying transaction implementation
+
+One-to-One      :1 person has 1 passport    /One-to-One represents that a single entity is associated with a single instance of the other entity.
+One-to-Many     :1 cart has many items
+Many-to-Many    :Many students attend many courses
+Many-to-One     :Many books to a student
+
+
+
+
+
+

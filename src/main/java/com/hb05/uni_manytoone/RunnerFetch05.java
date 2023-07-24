@@ -21,35 +21,35 @@ public class RunnerFetch05 {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
 
+        //----------------------------------------------------------------------------
 
-
-        //we are here
-
-
-
-        //using get method fetch student and university Object
-        Student05 student1 = session.get(Student05.class, 1001L);
+        //by using get method fetch Student object
+        Student05 student1= session.get(Student05.class, 1001L);
         System.out.println(student1);
 
-        System.out.println(student1.getUniversity());
-        System.out.println(student1.getUniversity().getName());
 
+        //by using get method fetch University Object
         University university = session.get(University.class, 101L);
         System.out.println(university);
 
 
-        //// fetch student whose university id is 101 using HQL
-        System.out.println("fetch student whose university id is 101 using HQL");
-        String hqlQuery = "FROM Student05 s WHERE s.university.id = 101L";
-        List<Student05> resultList1 =  session.createQuery(hqlQuery,Student05.class).getResultList();
-        resultList1.forEach(obj-> System.out.println(obj));
+        //to access to the student's university
+        System.out.println(student1.getUniversity());
 
 
-        //but it does not work
-        List<Object[]> resultList2 =  session.createQuery(hqlQuery).getResultList();
-        for(Object[] w: resultList2) {
-            System.out.println(Arrays.toString(w));
+        //Fetch the students whose university id is 101
+        System.out.println("----students whose university id is 101----------");
+        String hqlQuery = "FROM Student05 s WHERE s.university.id=101L";
+        List<Student05> list =  session.createQuery(hqlQuery,Student05.class).getResultList();
+        for(Student05 student: list) {
+            System.out.println(student);
         }
+
+        //or
+        list.forEach(obj-> System.out.println(obj));
+
+
+
 
         tx.commit(); //without commit() data will not be sent to DB
         session.close();

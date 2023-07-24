@@ -12,7 +12,7 @@ public class RunnerSave05 {
     public static void main(String[] args) {
 
 
-        //create University objects
+        //create student objects
         Student05 student1 = new Student05();
         student1.setId(1001L);
         student1.setName("Jace");

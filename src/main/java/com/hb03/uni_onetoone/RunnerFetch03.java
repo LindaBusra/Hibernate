@@ -21,11 +21,11 @@ public class RunnerFetch03 {
         Student03 student1 = session.get(Student03.class, 1001L);
         System.out.println(student1);
 
-        System.out.println("**** Using .get() to fetch the Diary with id 101 ****");
+        System.out.println("**** Using .get() to fetch the DiaryForCustomer with id 101 ****");
         Diary diary1 = session.get(Diary.class, 101L);
         System.out.println(diary1);
 
-        System.out.println("**** Using getter to fetch the Student04 from Diary ****");
+        System.out.println("**** Using getter to fetch the Student04 from DiaryForCustomer ****");
         System.out.println(diary1.getStudent());
 
 

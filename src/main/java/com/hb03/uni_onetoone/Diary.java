@@ -12,7 +12,7 @@ public class Diary {
     private String name;
 
     @OneToOne
-    @JoinColumn()
+//    @JoinColumn()  //optional
     private Student03 student;      // <-- student_id
 
 
